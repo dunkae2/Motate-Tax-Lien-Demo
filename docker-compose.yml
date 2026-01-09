@@ -1,0 +1,9 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: motate
+      POSTGRES_PASSWORD: motate
+      POSTGRES_DB: taxliens
+    ports:
+      - "5432:5432"
