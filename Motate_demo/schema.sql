@@ -1,11 +1,10 @@
--- 1) One row per state/jurisdiction
+
 CREATE TABLE IF NOT EXISTS jurisdiction (
   id SERIAL PRIMARY KEY,
   name TEXT NOT NULL,
   code TEXT NOT NULL UNIQUE
 );
 
--- 2) One row per downloaded source file (PDF)
 CREATE TABLE IF NOT EXISTS source_document (
   id SERIAL PRIMARY KEY,
   jurisdiction_id INT NOT NULL REFERENCES jurisdiction(id),
@@ -16,7 +15,6 @@ CREATE TABLE IF NOT EXISTS source_document (
   UNIQUE (jurisdiction_id, sha256)
 );
 
--- 3) One row per property
 CREATE TABLE IF NOT EXISTS property (
   id SERIAL PRIMARY KEY,
   jurisdiction_id INT NOT NULL REFERENCES jurisdiction(id),
@@ -27,7 +25,6 @@ CREATE TABLE IF NOT EXISTS property (
   UNIQUE (jurisdiction_id, ssl)
 );
 
--- 4) The main lien facts table
 CREATE TABLE IF NOT EXISTS tax_lien (
   id SERIAL PRIMARY KEY,
   jurisdiction_id INT NOT NULL REFERENCES jurisdiction(id),
